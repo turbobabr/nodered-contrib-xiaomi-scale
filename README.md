@@ -12,13 +12,9 @@ Developed by the super cool folks at [Originally US](http://originally.us) - a m
 
 ## Installation
 
-Install directly from your NodeRED's Setting Pallete
-
-or
-
 Change your working directory to your node red installation. Usually it's in ~/.node-red.
 
-    $ npm install nodered-contrib-xiaomi-scale
+    $ npm install https://github.com/turbobabr/nodered-contrib-xiaomi-scale
     
 
 
