@@ -1,3 +1,5 @@
+A fixed version of [nodered-contrib-xiaomi-scale](https://flows.nodered.org/node/nodered-contrib-xiaomi-scale) that supports `node 12.15.0`.
+
 # nodered-contrib-xiaomi-scale
 
 ![Xiaomi Scale](https://raw.githubusercontent.com/originallyus/nodered-contrib-xiaomi-scale/master/xiaomi_scale.jpg "Xiaomi Scale")
@@ -12,11 +14,30 @@ Developed by the super cool folks at [Originally US](http://originally.us) - a m
 
 ## Installation
 
+### Prerequisites
+
+    sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev
+
+### Package installation
+
 Change your working directory to your node red installation. Usually it's in ~/.node-red.
 
-    $ npm install https://github.com/turbobabr/nodered-contrib-xiaomi-scale
+    npm install https://github.com/turbobabr/nodered-contrib-xiaomi-scale
     
+### Running without root/sudo
 
+Run the following command:
+
+```sh
+sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+```
+
+This grants the ```node``` binary ```cap_net_raw``` privileges, so it can start/stop BLE advertising.
+
+__Note:__ The above command requires ```setcap``` to be installed, it can be installed using the following:
+
+ * apt: ```sudo apt-get install libcap2-bin```
+ * yum: ```su -c \'yum install libcap2-bin\'```
 
 ## FAQ
 
