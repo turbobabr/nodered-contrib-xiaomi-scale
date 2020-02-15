@@ -60,18 +60,12 @@ class MiScale extends EventEmitter {
             scale.weight /= 2;
         }
 
-        this.emit('data', scale);
+        if(scale.isStabilized && !scale.loadRemoved) {            
+            this.emit('data', scale);
+        }       
     };
-
-    _yunmaiScaleListener(peripheral) {
-        let scale = new Object();
-        console.log("Yunmai scale detected!");
-    }
-
-    _includes(str,search) {
-        return str.indexOf(search) !== -1;
-    }
-
+    
+    
     _nobleDiscoverListener(peripheral) {
         let passMacAddress = true;
         if (this._macAddr != undefined && peripheral.address != this._macAddr)
@@ -84,12 +78,7 @@ class MiScale extends EventEmitter {
     };
 
     startScanning() {
-        noble.startScanning([], true);
-        // noble.on('stateChange', function(state) {
-        //     if (state === 'poweredOn') {
-        //         noble.startScanning([], true);
-        //     }
-        // });
+        noble.startScanning([], true);        
     };
 
     stopScanning() {

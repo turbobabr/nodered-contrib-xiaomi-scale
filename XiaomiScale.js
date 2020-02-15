@@ -6,29 +6,19 @@ module.exports = function(RED) {
 
     var node = this;
     var msg;
-    var showalldata = config.showalldata;
 
-    let miscale = new MiScale();
-    node.warn("Xiaomi Scale: Start scanning...")
+    let miscale = new MiScale();    
     miscale.startScanning();
   
-    miscale.on('data', function (scale) {
-      console.log(scale);
+    miscale.on('data', function (scale) {      
       msg = scale;
-      msg.payload  = scale.weight
-      if (showalldata) {
-        if (scale.isStabilized == false || scale.loadRemoved == false ) {
-          return
-        }
-      }
+      msg.payload  = scale.weight;      
       node.send(msg)
     });
 
     // tidy up any state
-    this.on('close', function() {
-      node.warn("Xiaomi Scale: on close")
-      miscale.stopScanning();
-      showalldata = "false";
+    this.on('close', function() {      
+      miscale.stopScanning();      
     });
 
   }
