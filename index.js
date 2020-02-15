@@ -68,6 +68,10 @@ class MiScale extends EventEmitter {
         console.log("Yunmai scale detected!");
     }
 
+    _includes(str,search) {
+        return str.indexOf(search) !== -1;
+    }
+
     _nobleDiscoverListener(peripheral) {
         let passMacAddress = true;
         if (this._macAddr != undefined && peripheral.address != this._macAddr)
@@ -75,11 +79,12 @@ class MiScale extends EventEmitter {
 
         if (!passMacAddress)
             return;
-
-        if (peripheral.advertisement.localName.includes('MI_SCALE')) {
+            
+        if (this._includes(peripheral.advertisement.localName,'MI_SCALE')) {
             this._xiaoMiScaleListener(peripheral);
         }
-        if (peripheral.advertisement.localName.includes('YUNMAI')) {
+
+        if (this._includes(peripheral.advertisement.localName,'YUNMAI')) {
             this._yunmaiScaleListener(peripheral);
         }
     };
