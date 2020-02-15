@@ -80,13 +80,7 @@ class MiScale extends EventEmitter {
         if (!passMacAddress)
             return;
             
-        if (this._includes(peripheral.advertisement.localName,'MI_SCALE')) {
-            this._xiaoMiScaleListener(peripheral);
-        }
-
-        if (this._includes(peripheral.advertisement.localName,'YUNMAI')) {
-            this._yunmaiScaleListener(peripheral);
-        }
+        this._xiaoMiScaleListener(peripheral);
     };
 
     startScanning() {
